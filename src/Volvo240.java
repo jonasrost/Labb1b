@@ -6,7 +6,7 @@ import java.awt.*;
 public class Volvo240 extends Car {
 
     /*** The trim factor of the car */
-    public final static double trimFactor = 1.25;
+    private final static double trimFactor = 1.25;
 
     /***
      * Constructor of the class that calls upon the constructor in 'Car'.

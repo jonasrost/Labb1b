@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Truck extends Car {
+public abstract class Truck extends Vehicle {
 
 
     /***
@@ -13,17 +13,5 @@ public abstract class Truck extends Car {
     public Truck(int nrDoors, double enginePower, Color color, String modelName) {
         super(nrDoors, enginePower, color, modelName);
     }
-
-    /***
-     * Abstract method to enable overriding in subclasses of this particular method
-     * @param amount used as an multiplier
-     */
-    protected abstract void incrementSpeed(double amount);
-
-    /***
-     * Abstract method to enable overriding in subclasses of this particular method
-     * @param amount used as an multiplier
-     */
-    protected abstract void decrementSpeed(double amount);
 
 }
