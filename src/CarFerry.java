@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+/** A class that creates a "Ferry" which has a {@code Transporter} object to give it the functionality of a transporter.*/
 public class CarFerry {
     /** Declaration of a {@code Transporter} variable that when initiated contains functionality of a transporter. */
     private Transporter<Car> parentTransporter;

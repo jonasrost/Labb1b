@@ -1,6 +1,6 @@
 import java.awt.*;
 
-/** Car is an abstracat class made to categorise objects that falls under the "car" section of the vehicle domain.*/
+/** Car is an abstract class made to categorise objects that falls under the "car" section of the vehicle domain.*/
 public abstract class Car extends Vehicle implements Transportable{
 
     /***

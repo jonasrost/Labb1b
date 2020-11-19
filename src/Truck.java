@@ -1,5 +1,5 @@
 import java.awt.*;
-
+/** Truck is an abstract class made to categorise objects that falls under the "truck" section of the vehicle domain.*/
 public abstract class Truck extends Vehicle {
 
 
