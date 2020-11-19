@@ -37,6 +37,10 @@ public class Scania extends Truck{
             truckBedAngle = value;
     }
 
+    public int getCurrentAngleOfTruckBed() {
+        return truckBedAngle;
+    }
+
     /***
      * Sets currentSpeed to 0.1, given that truckBedAngle = 0.
      */

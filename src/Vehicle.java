@@ -194,7 +194,7 @@ public abstract class Vehicle implements Movable {
      * @param newY the new y coordinate
      */
     protected void setYCoordinate(double newY) {
-        this.xCord = newY;
+        this.yCord = newY;
     }
 
 

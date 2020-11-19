@@ -42,6 +42,13 @@ public class Tester {
     }
 
     @Test
+    public void testChangeTruckBedAngleToNegativeValueNotOK() {
+        Scania scania = new Scania();
+        scania.decreaseAngleOfTruckBedTo(-4);
+        assertTrue(scania.getCurrentAngleOfTruckBed() == 0);
+    }
+
+    @Test
     public void loadAndUnloadCarsFromLorryOk() {
         ArticulatedLorry testLorry = new ArticulatedLorry();
         Saab95 saab = new Saab95();
@@ -58,6 +65,23 @@ public class Tester {
     }
 
     @Test
+    public void testMoveLorryOK() {
+        ArticulatedLorry testLorry = new ArticulatedLorry();
+        Saab95 saab = new Saab95();
+
+        testLorry.setDownRamp();
+        testLorry.loadCarOnLorry(saab);
+        testLorry.liftUpRamp();
+
+        testLorry.gas(0.5);
+        testLorry.move();
+        testLorry.turnLeft();
+        testLorry.move();
+
+        assertTrue(saab.getXCoordinate() == testLorry.getXCoordinate() && saab.getYCoordinate() == testLorry.getYCoordinate());
+    }
+
+    @Test
     public void loadAndUnloadCarsFromFerryOK() {
         CarFerry testFerry = new CarFerry();
         Saab95 saab = new Saab95();
@@ -71,9 +95,12 @@ public class Tester {
         testFerry.unloadCarsFromFerry(2);
 
         assertTrue(testFerry.getCarsOnFerry().remove(0).equals(volvo));
-
     }
 
+
+
+
+    @Test
     public void testWorkshopCanNotAddDuplicateOK() {
         Workshop<Car> carWorkshop = new Workshop<>();
         Saab95 saab = new Saab95();
@@ -83,9 +110,9 @@ public class Tester {
         carWorkshop.putVehicleInWorkshop(volvo);
         carWorkshop.putVehicleInWorkshop(saab);
 
-
-
-
+        assertTrue(carWorkshop.nrOfVehiclesInWorkshop() == 2);
     }
+
+
 
 }
