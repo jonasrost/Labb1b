@@ -1,13 +1,13 @@
 import java.awt.*;
-import java.util.ArrayList;
 
-public class ArticulatedLorry extends Truck{
-    private ArrayList<Car> loadedCars;
+public class ArticulatedLorry extends Truck {
+
+    private Transporter<Car> parentTransporter;
     private boolean rampLifted;
 
     public ArticulatedLorry() {
         super(2, 800, Color.blue, "ArticulatedLorry");
-        loadedCars = new ArrayList<>();
+        parentTransporter = new Transporter<>(this.getXCoordinate(), this.getYCoordinate());
         rampLifted = true;
     }
 
@@ -17,18 +17,22 @@ public class ArticulatedLorry extends Truck{
             this.rampLifted = false;
     }
 
+
     public void liftUpRamp() {
         this.rampLifted = true;
     }
+
 
     private void giveLoadedCarSamePosition(Car loadedCar) {
         loadedCar.setXCoordinate(this.getXCoordinate());
         loadedCar.setYCoordinate(this.getYCoordinate());
     }
 
+
     public int nrOfCarsLoaded() {
-        return loadedCars.size();
+        return parentTransporter.nrOfEntities();
     }
+
 
     private boolean checkDistanceFromCarOK(Car car) {
         double deltaX = Math.abs(this.getXCoordinate() - car.getXCoordinate());
@@ -40,35 +44,61 @@ public class ArticulatedLorry extends Truck{
         return false;
     }
 
-    public void loadCarOnTransport(Car carToBeLoaded) {
+
+    public void loadCarOnLorry(Car carToBeLoaded) {
         if (checkDistanceFromCarOK(carToBeLoaded) && !rampLifted && nrOfCarsLoaded() < 5) {
             carToBeLoaded.stopEngine();
-            this.loadedCars.add(carToBeLoaded);
+            parentTransporter.addToTransport(carToBeLoaded);
             giveLoadedCarSamePosition(carToBeLoaded);
         }
     }
+
 
     private void moveCarAwayFromTransportAfterUnload(Car unloadedCar) {
         unloadedCar.setXCoordinate(this.getXCoordinate() - 2);
         unloadedCar.setYCoordinate(this.getYCoordinate() + 2);
     }
 
-    public void unloadCarsFromTransport(int nrOfCarsToUnload) {
+
+    public void unloadCarsFromLorry(int nrOfCarsToUnload) {
         if (!rampLifted) {
             for (int i = 0; i < nrOfCarsToUnload; i++) {
-                Car unloadedCar = this.loadedCars.remove((loadedCars.size()-1));
+                Car unloadedCar = parentTransporter.removeFromTransport(parentTransporter.getTransportedEntities().size()-1);
                 moveCarAwayFromTransportAfterUnload(unloadedCar);
             }
         }
     }
+
 
     @Override
     protected void incrementSpeed(double amount) {
         currentSpeed = Math.min(getCurrentSpeed() + 2 * amount, getEnginePower());
     }
 
+
     @Override
     protected void decrementSpeed(double amount) {
         currentSpeed = Math.max(getCurrentSpeed() - 30 * amount, 0);
+    }
+
+
+    @Override
+    public void move() {
+        if (direction == NORTH)
+            this.setYCoordinate(this.getYCoordinate() + getCurrentSpeed());
+        else if (direction == EAST)
+            this.setXCoordinate(this.getXCoordinate() + getCurrentSpeed());
+        else if (direction == SOUTH)
+            this.setYCoordinate(this.getYCoordinate() - getCurrentSpeed());
+        else
+            this.setXCoordinate(this.getXCoordinate() - getCurrentSpeed());
+
+
+        for (Car loadedCar: parentTransporter.getTransportedEntities()) {
+            loadedCar.changePosition(this.getXCoordinate(), this.getYCoordinate());
+        }
+
+        parentTransporter.moveTransporter(direction, getCurrentSpeed());
+
     }
 }

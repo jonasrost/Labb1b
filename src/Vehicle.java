@@ -3,7 +3,7 @@ import java.awt.*;
 /***
  * An abstract class that represents a car, which implements the interface 'Movable'.
  */
-public abstract class Vehicle implements Movable{
+public abstract class Vehicle implements Movable {
 
     /*** Number of doors on the car */
     protected int nrDoors;
@@ -195,6 +195,17 @@ public abstract class Vehicle implements Movable{
      */
     protected void setYCoordinate(double newY) {
         this.xCord = newY;
+    }
+
+
+    /***
+     * Chenges both the x and y coordinate of the car
+     * @param x new x coordinate
+     * @param y new y coordinate
+     */
+    protected void changePosition(double x, double y) {
+        this.setXCoordinate(x);
+        this.setYCoordinate(y);
     }
 
 }

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public abstract class Car extends Vehicle{
+public abstract class Car extends Vehicle implements Transportable{
 
     /***
      * Constructor of the class
