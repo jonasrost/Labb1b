@@ -41,16 +41,19 @@ public class Tester {
         assertTrue(scania.getCurrentSpeed() == 0);
     }
 
-    /*@Test
+    @Test
     public void loadAndUnloadCarsFromLorryOk() {
-        ArticulatedLorry test = new ArticulatedLorry();
+        ArticulatedLorry testLorry = new ArticulatedLorry();
         Saab95 saab = new Saab95();
         Saab95 saab2 = new Saab95();
-        test.setDownRamp();
-        test.loadCarOnLorry(saab);
-        test.loadCarOnLorry(saab2);
+        Volvo240 volvo = new Volvo240();
 
-        test.unloadCarFromLorry(saab2);
-        assertTrue(test.nrOfCarsLoaded() == 1);
-    }*/
+        testLorry.setDownRamp();
+        testLorry.loadCarOnLorry(saab);
+        testLorry.loadCarOnLorry(saab2);
+        testLorry.loadCarOnLorry(volvo);
+
+        testLorry.unloadCarsFromLorry(2);
+        assertTrue(testLorry.getCarsOnLorry().index == 1);
+
 }

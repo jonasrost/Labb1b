@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ArticulatedLorry extends Truck {
 
@@ -45,6 +46,10 @@ public class ArticulatedLorry extends Truck {
     }
 
 
+    public ArrayList<Car> getCarsOnLorry() {
+        return parentTransporter.getTransportedEntities();
+    }
+
     public void loadCarOnLorry(Car carToBeLoaded) {
         if (checkDistanceFromCarOK(carToBeLoaded) && !rampLifted && nrOfCarsLoaded() < 5) {
             carToBeLoaded.stopEngine();
@@ -63,7 +68,7 @@ public class ArticulatedLorry extends Truck {
     public void unloadCarsFromLorry(int nrOfCarsToUnload) {
         if (!rampLifted) {
             for (int i = 0; i < nrOfCarsToUnload; i++) {
-                Car unloadedCar = parentTransporter.removeFromTransport(parentTransporter.getTransportedEntities().size()-1);
+                Car unloadedCar = parentTransporter.removeFromTransport(getCarsOnLorry().size()-1);
                 moveCarAwayFromTransportAfterUnload(unloadedCar);
             }
         }
