@@ -7,6 +7,10 @@ public class Workshop<VehicleType extends Vehicle> {
         vehiclesInWorkshop = new ArrayList<>();
     }
 
+    public int nrOfVehiclesInWorkshop() {
+        return vehiclesInWorkshop.size();
+    }
+
 
     private <T extends VehicleType> boolean checkIfCarAlreadyInShop(T vehicle) {
         for (VehicleType t : vehiclesInWorkshop) {
@@ -18,7 +22,7 @@ public class Workshop<VehicleType extends Vehicle> {
 
 
     public <T extends VehicleType> void putVehicleInWorkshop(T vehicle) {
-        if (vehiclesInWorkshop.size() < 10 && !checkIfCarAlreadyInShop(vehicle))
+        if (nrOfVehiclesInWorkshop() < 10 && !checkIfCarAlreadyInShop(vehicle))
             this.vehiclesInWorkshop.add(vehicle);
     }
 

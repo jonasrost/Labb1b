@@ -54,6 +54,38 @@ public class Tester {
         testLorry.loadCarOnLorry(volvo);
 
         testLorry.unloadCarsFromLorry(2);
-        assertTrue(testLorry.getCarsOnLorry().index == 1);
+        assertTrue(testLorry.getCarsOnLorry().remove(0).equals(saab));
+    }
+
+    @Test
+    public void loadAndUnloadCarsFromFerryOK() {
+        CarFerry testFerry = new CarFerry();
+        Saab95 saab = new Saab95();
+        Saab95 saab2 = new Saab95();
+        Volvo240 volvo = new Volvo240();
+
+        testFerry.loadCarOnFerry(saab);
+        testFerry.loadCarOnFerry(saab2);
+        testFerry.loadCarOnFerry(volvo);
+
+        testFerry.unloadCarsFromFerry(2);
+
+        assertTrue(testFerry.getCarsOnFerry().remove(0).equals(volvo));
+
+    }
+
+    public void testWorkshopCanNotAddDuplicateOK() {
+        Workshop<Car> carWorkshop = new Workshop<>();
+        Saab95 saab = new Saab95();
+        Volvo240 volvo = new Volvo240();
+
+        carWorkshop.putVehicleInWorkshop(saab);
+        carWorkshop.putVehicleInWorkshop(volvo);
+        carWorkshop.putVehicleInWorkshop(saab);
+
+
+
+
+    }
 
 }

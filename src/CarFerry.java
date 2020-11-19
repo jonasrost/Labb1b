@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class CarFerry {
 
     private Transporter<Car> parentTransporter;
@@ -34,6 +36,9 @@ public class CarFerry {
         unloadedCar.setYCoordinate(yCoordinate + 2);
     }
 
+    public ArrayList<Car> getCarsOnFerry() {
+        return parentTransporter.getTransportedEntities();
+    }
 
     public void loadCarOnFerry(Car carToBeLoaded) {
         if (checkDistanceFromCarOK(carToBeLoaded) && nrOfCarsLoaded() < 15) {
