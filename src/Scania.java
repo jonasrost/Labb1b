@@ -1,7 +1,7 @@
 import java.awt.*;
 
 /***
- * Class that represents a Scania truck, which is a subclass to 'Car'.
+ * Class that represents a Scania truck, which is a subclass to 'Truck'.
  */
 public class Scania extends Truck{
     /***
@@ -10,7 +10,7 @@ public class Scania extends Truck{
     private int truckBedAngle;
 
     /***
-     * Constructor of the class that calls upon the constructor in 'Car'.
+     * Constructor of the class that calls upon the constructor in 'Truck'.
      */
     public Scania() {
         super(2, 400, Color.white, "Scania");
@@ -37,6 +37,9 @@ public class Scania extends Truck{
             truckBedAngle = value;
     }
 
+    /***
+     * @return the current value of {@code truckBedAngle}
+     */
     public int getCurrentAngleOfTruckBed() {
         return truckBedAngle;
     }

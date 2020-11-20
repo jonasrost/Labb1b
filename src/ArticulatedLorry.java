@@ -36,17 +36,11 @@ public class ArticulatedLorry extends Truck {
         return parentTransporter.nrOfEntities();
     }
 
-    /** */
+
     /** Method that checks the distance of the {@code ArticulatedLorry} object and a Car type argument in a 2D-Coordinate system
      * @param car*/
     private boolean checkDistanceFromCarOK(Car car) {
-        double deltaX = Math.abs(this.getXCoordinate() - car.getXCoordinate());
-        double deltaY = Math.abs(this.getYCoordinate() - car.getYCoordinate());
-        double delta = Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
-
-        if(delta < 10)
-            return true;
-        return false;
+        return parentTransporter.checkDistanceFromEntityOK(this.getXCoordinate(), this.getYCoordinate(), car, 10);
     }
 
     /** Method that return a list of {@code Car} objects that represents the loaded objects on the Transporter*/
@@ -57,7 +51,7 @@ public class ArticulatedLorry extends Truck {
      * If within acceptable values then add object to the list in {@code parentTransporter}.
      * @param carToBeLoaded */
     public void loadCarOnLorry(Car carToBeLoaded) {
-        if (checkDistanceFromCarOK(carToBeLoaded) && !rampLifted && nrOfCarsLoaded() < 5) {
+        if (checkDistanceFromCarOK(carToBeLoaded) && !rampLifted && nrOfCarsLoaded() < 5 && !carToBeLoaded.getAssignment()) {
             carToBeLoaded.stopEngine();
             parentTransporter.addToTransport(carToBeLoaded);
             giveLoadedCarSamePosition(carToBeLoaded);
@@ -113,8 +107,6 @@ public class ArticulatedLorry extends Truck {
         for (Car loadedCar: parentTransporter.getTransportedEntities()) {
             loadedCar.changePosition(this.getXCoordinate(), this.getYCoordinate());
         }
-
-        parentTransporter.moveTransporter(direction, getCurrentSpeed());
 
     }
 }

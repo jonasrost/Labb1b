@@ -27,13 +27,7 @@ public class CarFerry {
     /** Method that checks the distance of the {@code CarFerry} object and a Car type argument in a 2D-Coordinate system
      * @param car*/
     private boolean checkDistanceFromCarOK(Car car) {
-        double deltaX = Math.abs(xCoordinate - car.getXCoordinate());
-        double deltaY = Math.abs(yCoordinate - car.getYCoordinate());
-        double delta = Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
-
-        if(delta < 10)
-            return true;
-        return false;
+        return parentTransporter.checkDistanceFromEntityOK(xCoordinate, yCoordinate, car, 10);
     }
 
     /** Method that changes the position of the {@code Car} object entered as a argument away from the {@code CarFerry} in a 2D-Coordinate system.
@@ -51,7 +45,7 @@ public class CarFerry {
      * If within acceptable values then add object to the list in {@code parentTransporter}.
      * @param carToBeLoaded */
     public void loadCarOnFerry(Car carToBeLoaded) {
-        if (checkDistanceFromCarOK(carToBeLoaded) && nrOfCarsLoaded() < 15) {
+        if (checkDistanceFromCarOK(carToBeLoaded) && nrOfCarsLoaded() < 15 && !carToBeLoaded.getAssignment()) {
             parentTransporter.addToTransport(carToBeLoaded);
             giveLoadedCarSamePosition(carToBeLoaded);
         }

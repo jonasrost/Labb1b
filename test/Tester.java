@@ -102,7 +102,7 @@ public class Tester {
 
     @Test
     public void testWorkshopCanNotAddDuplicateOK() {
-        Workshop<Car> carWorkshop = new Workshop<>();
+        Workshop<Car> carWorkshop = new Workshop<>(10);
         Saab95 saab = new Saab95();
         Volvo240 volvo = new Volvo240();
 
